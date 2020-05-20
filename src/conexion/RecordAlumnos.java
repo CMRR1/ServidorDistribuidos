@@ -12,32 +12,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import negociodistribuidos.Tutor;
+import negociodistribuidos.Alumno;
+
 
 /**
  *
  * @author migue
  */
-public class RecordTutor {
-    
-    public ArrayList<Tutor> getTutores(Connection con){
-        String sql = "SELECT * FROM tutores";
+public class RecordAlumnos {
+    public ArrayList<Alumno> getAlumnos(Connection con){
+        String sql = "SELECT * FROM alumnos";
         ResultSet rs;
         CallableStatement cst;
-        ArrayList<Tutor> tutores = new ArrayList<Tutor>();
+        ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
         try {
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
             while(rs.next()){
-                Tutor tut= new Tutor(
-                    rs.getString("nombre"),
-                    rs.getString("usuario"),
-                    rs.getString("pass"),
-                    rs.getInt("id"),
-                    rs.getInt("id_alumno")
-                );
-                
-                tutores.add(tut);
+                Alumno alum= new Alumno(rs.getString("nombre"), 
+                        null, 
+                        null, 
+                        null, 
+                        rs.getInt("id"));
+
+                alumnos.add(alum);
 
             }
             
@@ -46,7 +44,6 @@ public class RecordTutor {
         }
         
         
-        return tutores;
+        return alumnos;
     } 
-    
 }
