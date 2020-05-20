@@ -36,7 +36,7 @@ public class ServidorDistribuidos {
 
     public static final String URL = "jdbc:mysql://localhost:3306/distribuidos?useTimezone=true&serverTimezone=UTC";
     public static final String user = "root";
-    public static final String pass = "root";
+    public static final String pass = "1235";
 
     //Sentencia que se le envía al manejador de la base de datos para ejecutar un SP
     /**
@@ -84,7 +84,7 @@ public class ServidorDistribuidos {
                         try {
                             // TODO code application logic here
                             //private static final String url ="jdbc:mysql://192.168.1.90:3306/fhdb?useTimezone=true&serverTimezone=UTC";
-                            Connection con = DriverManager.getConnection(URL, "root", "root");
+                            Connection con = DriverManager.getConnection(URL, "root", "1235");
 
                             RecordTutor re = new RecordTutor();
                             Tutor tut = re.checkLogin(user, pass, con);
@@ -121,7 +121,7 @@ public class ServidorDistribuidos {
                         RecordAsignaciones as = new RecordAsignaciones();
                         System.out.println("Leyendo el id del alumno");
                         int id = in.readInt();
-                        Connection con = DriverManager.getConnection(URL, "root", "root");
+                        Connection con = DriverManager.getConnection(URL, "root", "1235");
                         System.out.println("Creando la lista");
                         ArrayList<Asignacion> asignaciones = as.getAsignacionesAlumno(con, id);
                         out.writeInt(asignaciones.size());
@@ -146,7 +146,7 @@ public class ServidorDistribuidos {
                         RecordAsignaciones as = new RecordAsignaciones();
                         System.out.println("Leyendo el id de la asignacion a validar");
                         int id_asignacion = in.readInt();
-                        Connection con = DriverManager.getConnection(URL, "root", "root");
+                        Connection con = DriverManager.getConnection(URL, "root", "1235");
                         System.out.println("Enviando instruccion de validacion");
                         out.writeBoolean(as.revisarTarea(true, con, id_asignacion));
                         System.out.println("Asignacion revisada");
