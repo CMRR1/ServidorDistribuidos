@@ -20,7 +20,20 @@ import negociodistribuidos.Tutor;
  */
 public class RecordTutor {
     
-    public ArrayList<Tutor> getTutores(Connection con){
+    public Tutor checkLogin(String user, String pass, Connection con){
+        ArrayList<Tutor> tutores = getTutores(con);
+        for (Tutor tutore : tutores) {
+            System.out.println("---------");
+            System.out.println(tutore.getNombre());
+            System.out.println("----------");
+            if(tutore.getUsuario().equals(user) && tutore.getContrasenia().equals(pass)){
+                return tutore;
+            }
+        }
+        return null;
+    }
+    
+    private ArrayList<Tutor> getTutores(Connection con){
         String sql = "SELECT * FROM tutores";
         ResultSet rs;
         CallableStatement cst;
