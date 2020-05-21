@@ -20,8 +20,8 @@ import negociodistribuidos.Calificacion;
  */
 public class RecordCalificaciones {
     
-    public ArrayList<Calificacion> getCalificacions(Connection con){
-        String sql = "SELECT * FROM calificaciones";
+    public ArrayList<Calificacion> getCalificacions(Connection con, int id){
+        String sql = "SELECT * FROM calificaciones WHERE id_alumno="+id;
         ResultSet rs;
         CallableStatement cst;
         ArrayList<Calificacion> asig = new ArrayList<Calificacion>();

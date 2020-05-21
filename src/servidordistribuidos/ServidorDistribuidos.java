@@ -74,6 +74,7 @@ public class ServidorDistribuidos {
                 1 => obtenerAlumno
                 2 => obtener asignaciones del alumno
                 3 => validar asignacion por tutor
+                4 => ver progreso de calificaciones.
                  */
 
                 switch (opcion) {
@@ -104,7 +105,6 @@ public class ServidorDistribuidos {
 
                             //}
                             //System.out.println("Lista enviada");
-                            sc.close();
                             System.out.println("FIN");
                             con.close();
                         } catch (SQLException ex) {
@@ -135,7 +135,6 @@ public class ServidorDistribuidos {
                             }
 
                         }
-                        sc.close();
                         System.out.println("FIN");
                         con.close();
                         
@@ -151,7 +150,28 @@ public class ServidorDistribuidos {
                         out.writeBoolean(as.revisarTarea(true, con, id_asignacion));
                         System.out.println("Asignacion revisada");
                         
-                        sc.close();
+                        
+                        System.out.println("FIN");
+                        con.close();
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("Opcion revision de calificaciones");
+                        RecordCalificaciones cal = new RecordCalificaciones();
+                        System.out.println("Leyendo el ID del alumno que revisar las calificaciones");
+                        int id_alumno = in.readInt();
+                        Connection con = DriverManager.getConnection(URL, "root", "root");
+                        ArrayList<Calificacion> califs = cal.getCalificacions(con, id_alumno);
+                        System.out.println("Envia el total de calificaciones");
+                        System.out.println(califs.size());
+                        out.writeInt(califs.size());
+                        System.out.println("NO ANDO AQUI");
+                        for(int i =0;i<califs.size();i++){
+                             objOut.writeObject(califs.get(i));
+                             System.out.println(califs.get(i).getCurso());
+                        }
+
+                        
                         System.out.println("FIN");
                         con.close();
                         break;
@@ -159,7 +179,7 @@ public class ServidorDistribuidos {
                     default:
                         break;
                 }
-
+                sc.close();
             }
 
         } catch (IOException ex) {
